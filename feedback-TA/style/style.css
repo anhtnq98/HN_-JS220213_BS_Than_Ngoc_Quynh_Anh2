@@ -42,6 +42,10 @@ header h1 {
     font-size: larger;
 }
 
+.container .number button:hover {
+    background-color: pink;
+}
+
 .feed-back-input {
     margin: 40px 30px 30px 40px;
 }
