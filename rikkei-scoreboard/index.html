@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/33f1ec5491.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="play-point" id="play-point">
+        </div>
+        <div class="logo">Rikkei Scoreboard</div>
+        <div class="stop-watch">
+            <h3>Stopwatch</h3>
+            <div class="second" id="time">0</div>
+            <button onclick="start()">START</button>
+            <button onclick="reset()">RESET</button>
+        </div>
+    </header>
+
+    <table id="table-name" class="table-name">
+
+    </table>
+
+    <div class="footer">
+        <input class="input-name" id="input-player" type="text" placeholder="Enter a play's name">
+        <button onclick="addPlayer()" class="addName">ADD PLAYER</button>
+    </div>
+    <script>
+
+        let listPlayer = JSON.parse(localStorage.getItem("listPlayer"));
+        let totalScore = 0;
+
+        function addPlayer() {
+            let valuePlayer = document.getElementById("input-player").value;
+            let score = 0;
+            let newPlayer = {
+                player: valuePlayer,
+                score: score,
+            }
+
+            if (listPlayer == null) {
+                listPlayer = [];
+            }
+
+            listPlayer.push(newPlayer);
+            localStorage.setItem("listPlayer", JSON.stringify(listPlayer));
+            renderPlayer();
+            renderHeader();
+        }
+
+        function renderPlayer() {
+            let result = "";
+            for (i = 0; i < listPlayer.length; i++) {
+                result +=
+                    `
+                <tr>
+                    <td class = "delete"><button onclick="del(${i})"><i class="fa-sharp fa-solid fa-x"></i></button></td>
+                    <td><i class="fa-sharp fa-solid fa-crown"></i></td>
+                    <td>${listPlayer[i].player}</td>
+                    <td class = "down"><button onclick="downScore(${i})">-</button></td>
+                    <td>${listPlayer[i].score}</td>
+                    <td  class = "up"><button onclick="upScore(${i})">+</button></td>
+                </tr>
+                `;
+            }
+            document.getElementById("table-name").innerHTML = result;
+            document.getElementById("input-player").value = "";
+        }
+        renderPlayer();
+
+        function del(id) {
+            listPlayer.splice(id, 1);
+            localStorage.setItem("listPlayer", JSON.stringify(listPlayer));
+            renderPlayer();
+            renderHeader();
+        }
+
+        function upScore(id) {
+            ++listPlayer[id].score;
+            localStorage.setItem("listPlayer", JSON.stringify(listPlayer));
+            renderPlayer();
+            renderHeader();
+        }
+
+        function downScore(id) {
+            --listPlayer[id].score;
+            localStorage.setItem("listPlayer", JSON.stringify(listPlayer));
+            renderPlayer();
+            renderHeader();
+        }
+
+        function renderHeader() {
+            let a = 0;
+            for (j = 0; j < listPlayer.length; j++) {
+                a += listPlayer[j].score;
+                totalScore = a;
+            }
+            let headerRender =
+                `
+                <div>Player:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${listPlayer.length}</div>
+                <div>Total Points:${totalScore}</div>
+            `;
+            document.getElementById("play-point").innerHTML = headerRender;
+        }
+        renderHeader();
+
+        function start() {
+            let countSecond = 0;
+            setInterval(() => {
+                let showSecond = document.getElementsByClassName("second");
+                countSecond++;
+                showSecond[0].innerHTML = countSecond;
+            }, 1000)
+        }
+
+
+    </script>
+</body>
+
+</html>

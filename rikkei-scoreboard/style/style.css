@@ -1,0 +1,78 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
+.header {
+    padding-top: 20px;
+    background-color: rgb(193, 5, 5);
+    color: white;
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: xx-large;
+    padding-top: 20px;
+}
+
+.play-point {
+    width: 20%;
+    line-height: 1.5;
+    text-align: left;
+    padding-left: 30px;
+}
+
+.table-name {
+    width: 100%;
+}
+
+.delete button {
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    font-size: larger;
+}
+
+.down button,
+.up button {
+    border: none;
+    cursor: pointer;
+    font-size: larger;
+    background-color: rgb(197, 194, 194);
+}
+
+.stop-watch {
+    background-color: brown;
+    padding: 20px 40px 20px 40px;
+    margin-top: -20px;
+}
+
+.second {
+    margin: 5px;
+    font-size: xx-large;
+}
+
+.footer {
+    background-color: red;
+    color: white;
+    width: 100%;
+    display: flex;
+    padding: 10px;
+
+}
+
+.input-name {
+    width: 80%;
+    padding: 5px;
+    background-color: brown;
+}
+
+.addName {
+    width: 18%;
+    padding: 5px;
+}
